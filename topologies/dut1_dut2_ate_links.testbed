@@ -1,0 +1,62 @@
+# proto-file: github.com/openconfig/ondatra/blob/main/proto/testbed.proto
+# proto-message: ondatra.Testbed
+
+# Exercise 1: Define the Testbed
+# ATE port1 ---- DUT1 port1
+# DUT1 port2 ---- DUT port1
+# DUT port2 ---- ATE port2
+
+duts {
+  id: "dut"
+  vendor: ARISTA
+  ports {
+    id: "port1"
+    speed: S_10GB
+    pmd: PMD_10GBASE_LR
+  }
+  ports {
+    id: "port2"
+    speed: S_10GB
+    pmd: PMD_10GBASE_LR
+  }
+}
+duts {
+  id: "dut1"
+  vendor: ARISTA
+  ports {
+    id: "port1"
+    speed: S_10GB
+    pmd: PMD_10GBASE_LR
+  }
+  ports {
+    id: "port2"
+    speed: S_10GB
+    pmd: PMD_10GBASE_LR
+  }
+}
+ates {
+  id: "ate"
+  vendor: IXIA
+  ports {
+    id: "port1"
+    speed: S_10GB
+    pmd: PMD_10GBASE_LR
+  }
+  ports {
+    id: "port2"
+    speed: S_10GB
+    pmd: PMD_10GBASE_LR
+  }
+}
+links {
+  a: "ate:port1"
+  b: "dut1:port1"
+}
+links {
+  a: "dut1:port2"
+  b: "dut:port1"
+}
+links {
+  a: "dut:port2"
+  b: "ate:port2"
+}
